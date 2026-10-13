@@ -40,7 +40,9 @@ Palier 3 :
 
 Q1/ 
 Le degradée dessiné derriere l'image ,le texte blanc sera difficile à lire.
+
 Q2/
 les coins de la banniere ne sont plus découpé par le widget donc l'image peut depasser les coins.
+
 Q3/
 Pour preserver la place au boutton decouvrir.
