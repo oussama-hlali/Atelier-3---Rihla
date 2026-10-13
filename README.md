@@ -31,3 +31,16 @@ StatelessWidget permet d'afficher les données qui ne doit pas modifier c'est po
 Q3/
 cs.primary utilise lla couleur principal du theme  
 Colors.teal est un coleur predefinie et ne change pas automatiquement quand seedColor change.
+
+Palier 3 :
+
+
+![Screenshot](assets/images/palier3.png)
+
+
+Q1/ 
+Le degradée dessiné derriere l'image ,le texte blanc sera difficile à lire.
+Q2/
+les coins de la banniere ne sont plus découpé par le widget donc l'image peut depasser les coins.
+Q3/
+Pour preserver la place au boutton decouvrir.
