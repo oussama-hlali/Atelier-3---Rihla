@@ -17,4 +17,17 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 Palier 1 :
-![Screenshot](images/palier%1.png)
+![Screenshot](assets/images/palier%201.png)
+
+Palier 2 :
+![Screenshot](assets/images/palier2.png)
+
+Q1/
+column prend largeur nécessaire a son contenu, si les textes sont trop longs, ub debordement horizontal se fait apparaitre
+
+Q2/
+StatelessWidget permet d'afficher les données qui ne doit pas modifier c'est pour cela le prenom est final
+
+Q3/
+cs.primary utilise lla couleur principal du theme  
+Colors.teal est un coleur predefinie et ne change pas automatiquement quand seedColor change.

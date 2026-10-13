@@ -31,8 +31,9 @@ class HomeHeader extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 "Où partez-vous\naujourd'hui ?",
-                style: TextTheme().headlineSmall?.copyWith(
+                style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
+                  height: 1.15,
                 ),
               ),
 
@@ -48,7 +49,7 @@ class HomeHeader extends StatelessWidget {
           radius: 20,
           backgroundColor: cs.primaryContainer,
           child: Text(
-            prenom.isEmpty ? prenom[0].toUpperCase() : '?',
+            prenom.isEmpty ? '?' : prenom[0].toUpperCase(),
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
           ),
         ),
