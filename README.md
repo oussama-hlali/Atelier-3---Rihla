@@ -46,3 +46,14 @@ les coins de la banniere ne sont plus découpé par le widget donc l'image peut 
 
 Q3/
 Pour preserver la place au boutton decouvrir.
+
+
+Palier 4 :
+
+![Screenshot](assets/images/palier4.png)
+
+
+Q1/
+le spacer peut manquer d'espace fini et provoque un probelm de mise en page .Quoique le Row donne une largeur a la Column grace a Expand.
+Q2/ 
+Il suffit de ajouter une destination dans lib/data/destinations.dart et le boucle affichera auto .
