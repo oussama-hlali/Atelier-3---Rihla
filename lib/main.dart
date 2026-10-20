@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rihla/data/destinations.dart';
+import 'package:rihla/screens/detail_screen.dart';
 
 import 'screens/home_screen.dart';
 
@@ -22,7 +24,7 @@ class RihlaApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0E7C86)),
       ),
 
-      home: const HomeScreen(),
+      home: DetailScreen(destination: destinations[1]),
     );
   }
 }

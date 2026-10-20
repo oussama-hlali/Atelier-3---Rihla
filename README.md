@@ -90,3 +90,9 @@ Palier 6 :
 Palier 7 :
 
 ![Screenshot](assets/images/palier7.png)
+
+
+Le Devoir :
+
+
+![Screenshot](assets/images/ledevoir.png)
