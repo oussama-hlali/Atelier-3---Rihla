@@ -57,3 +57,21 @@ Q1/
 le spacer peut manquer d'espace fini et provoque un probelm de mise en page .Quoique le Row donne une largeur a la Column grace a Expand.
 Q2/ 
 Il suffit de ajouter une destination dans lib/data/destinations.dart et le boucle affichera auto .
+
+
+Palier 5 :
+
+![Screenshot](assets/images/palier5.png)
+
+Q9/
+
+sans setState la valuer _categorie change en memoire mais flutter n'est pas eu du changement, les cartes restent inchangés.
+
+Q10/
+
+pour afficher les destinations correspondent a la categorie selectionnee 
+
+
+Q11/
+
+car il n'a pas besoin de faire un etat interne.
