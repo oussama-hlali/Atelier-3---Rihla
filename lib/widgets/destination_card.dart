@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/destination.dart';
+import '../widgets/favorite_button.dart';
 import '../data/destinations.dart';
 import '../widgets/home_header.dart';
 import '../widgets/search_box.dart';
@@ -44,6 +45,7 @@ class DestinationCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 14),
+
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,16 +99,8 @@ class DestinationCard extends StatelessWidget {
                 ],
               ),
             ),
-            IconButton(
-              tooltip: isFavorite
-                  ? 'Retirer des favoris'
-                  : 'Ajouter aux favoris',
-              onPressed: onFavoriteToggle,
-              icon: Icon(
-                isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: isFavorite ? Colors.red : cs.onSurfaceVariant,
-              ),
-            ),
+
+            const FavoriteButton(),
           ],
         ),
       ),

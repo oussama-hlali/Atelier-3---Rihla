@@ -75,3 +75,13 @@ pour afficher les destinations correspondent a la categorie selectionnee
 Q11/
 
 car il n'a pas besoin de faire un etat interne.
+
+
+
+Palier 6 :
+
+![Screenshot](assets/images/palier61.png)
+
+
+
+![Screenshot](assets/images/palier62.png)

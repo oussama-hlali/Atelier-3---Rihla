@@ -69,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             for (final destination in _flitrees)
               DestinationCard(
+                key: ValueKey(destination.nom),
                 destination: destination,
                 isFavorite: false,
                 onFavoriteToggle: () {},
