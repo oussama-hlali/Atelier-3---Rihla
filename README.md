@@ -85,3 +85,8 @@ Palier 6 :
 
 
 ![Screenshot](assets/images/palier62.png)
+
+
+Palier 7 :
+
+![Screenshot](assets/images/palier7.png)
