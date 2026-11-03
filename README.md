@@ -138,3 +138,18 @@ inputFormatters bloque les mauvais caractères pendant la frappe ,validator veri
 Q3/
 
  Pour liberer la memoire quand l'ecran est fermé et éviter une fuite de mémoir
+
+
+
+
+Palier 4 du TP5
+
+![Screenshot](assets/images/tp5palier4.png)
+![Screenshot](assets/images/tp5palier44.png)
+
+
+Q1/Pour user choisis la date avec calendrie pas le clavier
+
+
+Q2/ getter recalcule la valeur a chaque appel quand setState() reconstruit l'ecran, _total est relu avec la nouvelle formule.
+

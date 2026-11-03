@@ -24,6 +24,18 @@ class _ReservationScreenState extends State<ReservationScreen> {
   final _emailCtrl = TextEditingController();
   final _telCtrl = TextEditingController();
 
+  final _dateCtrl = TextEditingController();
+  DateTime? _date;
+  String _formule = 'Essentiel';
+  bool _conditions = false;
+
+  AutovalidateMode _autoValidation = AutovalidateMode.disabled;
+
+  int get _prixParPersonne => _formule == 'Confort'
+      ? (widget.destination.prix * 1.3).round()
+      : widget.destination.prix;
+
+  int get _total => _prixParPersonne * widget.voyageurs;
   @override
   void dispose() {
     // TODO 1 : libérer les trois contrôleurs, puis super.dispose()
@@ -76,6 +88,27 @@ class _ReservationScreenState extends State<ReservationScreen> {
     return null;
   }
 
+  Future<void> _choisirDate() async {
+    final demain = DateTime.now().add(const Duration(days: 1));
+    final choisie = await showDatePicker(
+      context: context,
+      initialDate: _date ?? demain,
+      firstDate: demain,
+      lastDate: DateTime.now().add(const Duration(days: 365)),
+      helpText: 'Date de départ',
+    );
+    // TODO 1 : si l'utilisateur annule (null), ne rien faire
+    if (choisie == null) return;
+    // TODO 2 : mémoriser la date et écrire 'jj/mm/aaaa' dans _dateCtrl
+    setState(() {
+      _date = choisie;
+      _dateCtrl.text =
+          '${choisie.day.toString().padLeft(2, '0')}/'
+          '${choisie.month.toString().padLeft(2, '0')}/'
+          '${choisie.year}';
+    });
+  }
+
   void _valider() {
     if (!_formKey.currentState!.validate()) return;
     // Provisoire : sera remplacé au palier 5
@@ -86,16 +119,17 @@ class _ReservationScreenState extends State<ReservationScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(title: const Text('Réserver')),
       body: Form(
         key: _formKey,
+        autovalidateMode: _autoValidation, // CHANGED (exercice)
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // TODO 4 : récapitulatif (image 64 x 64, nom, durée, voyageurs)
               Card(
                 elevation: 0,
                 color: theme.colorScheme.primaryContainer,
@@ -127,7 +161,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                               ),
                             ),
                             Text(
-                              // À ADAPTER : `duree` = le nom réel dans ta classe Destination
+                              // À ADAPTER : `duree` = nom réel dans ta classe Destination
                               '${widget.destination.duree} jours · ${widget.voyageurs} voyageur(s)',
                               style: theme.textTheme.bodySmall,
                             ),
@@ -138,10 +172,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 24),
-
-              // CHANGED: titre de section, comme sur la maquette
               Text(
                 'Vos coordonnées',
                 style: theme.textTheme.titleMedium?.copyWith(
@@ -157,10 +188,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
                 validator: _validerNom,
               ),
               const SizedBox(height: 16),
-              // TODO 5 : champ E-mail (clavier emailAddress)
-              // TODO 6 : champ Téléphone (clavier phone, chiffres seulement,
-              //          8 maximum, texte d'aide '8 chiffres, sans indicatif')
-
               TextFormField(
                 controller: _emailCtrl,
                 decoration: _deco('E-mail', Icons.email_outlined),
@@ -183,20 +210,90 @@ class _ReservationScreenState extends State<ReservationScreen> {
                 ],
                 validator: _validerTel,
               ),
+              const SizedBox(height: 24),
+              Text(
+                'Votre voyage',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 12),
+
+              TextFormField(
+                controller: _dateCtrl,
+                readOnly: true,
+                onTap: _choisirDate,
+                decoration: _deco(
+                  'Date de départ',
+                  Icons.calendar_month_outlined,
+                ),
+                validator: (_) => _date == null ? 'Choisissez une date' : null,
+              ),
+              const SizedBox(height: 16),
+
+              SegmentedButton<String>(
+                segments: const [
+                  ButtonSegment(
+                    value: 'Essentiel',
+                    label: Text('Essentiel'),
+                    icon: Icon(Icons.backpack_outlined),
+                  ),
+                  ButtonSegment(
+                    value: 'Confort',
+                    label: Text('Confort +30 %'),
+                    icon: Icon(Icons.hotel_outlined),
+                  ),
+                ],
+                selected: {_formule},
+                onSelectionChanged: (choix) {
+                  // TODO 3 : mémoriser choix.first dans _formule
+                  setState(() => _formule = choix.first);
+                },
+              ),
+              const SizedBox(height: 8),
+              CheckboxListTile(
+                value: _conditions,
+                onChanged: (v) => setState(() => _conditions = v ?? false),
+                controlAffinity: ListTileControlAffinity.leading,
+                contentPadding: EdgeInsets.zero,
+                title: const Text("J'accepte les conditions d'annulation"),
+                subtitle: const Text("Annulation gratuite jusqu'à 48 h avant"),
+              ),
             ],
           ),
         ),
       ),
-      // TODO 7 : bottomNavigationBar avec un FilledButton.icon « Confirmer »
-      //          qui appelle _valider (inspirez-vous de la barre du détail)
-
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: FilledButton.icon(
-            onPressed: _valider,
-            icon: const Icon(Icons.check),
-            label: const Text('Confirmer'),
+          child: Row(
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '$_prixParPersonne DT × ${widget.voyageurs}',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    '$_total DT',
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: FilledButton.icon(
+                  onPressed: _conditions ? _valider : null, // null = grisé
+                  icon: const Icon(Icons.check),
+                  label: const Text('Confirmer'),
+                ),
+              ),
+            ],
           ),
         ),
       ),
