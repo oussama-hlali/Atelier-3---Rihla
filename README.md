@@ -158,7 +158,7 @@ Q2/ getter recalcule la valeur a chaque appel quand setState() reconstruit l'ecr
 
 
 
-Palier 6 du TP5
+Palier 5 du TP5
 
 ![Screenshot](assets/images/tp5palier5.png)
 
@@ -175,6 +175,13 @@ apres l await lecran a peut etre fermé et utiliser son context peut causer des 
 
 Q3/
  boîte de dialogue est un ecran posé sur la pile de navigation, comme une page. On la ferme donc avec pop.
+
+
+
+Palier 6 du TP5 :
+
+
+![Screenshot](assets/images/tp5palier6.png)
 
 
 
