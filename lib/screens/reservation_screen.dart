@@ -112,8 +112,16 @@ class _ReservationScreenState extends State<ReservationScreen> {
   void _valider() {
     if (!_formKey.currentState!.validate()) return;
     // Provisoire : sera remplacé au palier 5
-    ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Formulaire valide')));
+    final reservation = Reservation(
+      destination: widget.destination,
+      nom: _nomCtrl.text.trim(),
+      email: _emailCtrl.text.trim(),
+      telephone: _telCtrl.text.trim(),
+      dateDepart: _date!,
+      voyageurs: widget.voyageurs,
+      formule: _formule,
+    );
+    Navigator.pop(context, reservation);
   }
 
   @override

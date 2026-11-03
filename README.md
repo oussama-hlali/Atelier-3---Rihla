@@ -145,6 +145,9 @@ Q3/
 Palier 4 du TP5
 
 ![Screenshot](assets/images/tp5palier4.png)
+
+
+
 ![Screenshot](assets/images/tp5palier44.png)
 
 
@@ -152,4 +155,26 @@ Q1/Pour user choisis la date avec calendrie pas le clavier
 
 
 Q2/ getter recalcule la valeur a chaque appel quand setState() reconstruit l'ecran, _total est relu avec la nouvelle formule.
+
+
+
+Palier 6 du TP5
+
+![Screenshot](assets/images/tp5palier5.png)
+
+
+Q1/
+
+null car aucune valeur n'a été renvoyée avec pop
+
+
+Q2/
+"Don't use 'BuildContext's across async gaps"
+
+apres l await lecran a peut etre fermé et utiliser son context peut causer des erreurs
+
+Q3/
+ boîte de dialogue est un ecran posé sur la pile de navigation, comme une page. On la ferme donc avec pop.
+
+
 

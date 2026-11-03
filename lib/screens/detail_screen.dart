@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../models/destination.dart';
 import '../widgets/favorite_button.dart';
 import 'reservation_screen.dart';
+import '../models/reservation.dart';
+import 'reservation_screen.dart';
 
 class DetailScreen extends StatefulWidget {
   final Destination destination;
@@ -15,14 +17,42 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   int _voyageurs = 2;
-  void _ouvrirReservation() {
-    Navigator.push(
+
+  Future<void> _reserver() async {
+    final reservation = await Navigator.push<Reservation>(
       context,
       MaterialPageRoute(
         builder: (context) => ReservationScreen(
           destination: widget.destination,
           voyageurs: _voyageurs,
         ),
+      ),
+    );
+
+    if (reservation == null) return;
+
+    if (!mounted) return;
+
+    await showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(Icons.check_circle, color: Colors.green, size: 48),
+        title: const Text('Réservation confirmée'),
+
+        content: Text(
+          '${reservation.nom}, votre voyage à '
+          '${reservation.destination.nom} est réservé.\n\n'
+          'Voyageurs : ${reservation.voyageurs}\n'
+          'Formule : ${reservation.formule}\n'
+          'Total : ${reservation.total} DT\n\n'
+          'Une confirmation sera envoyée à ${reservation.email}.',
+        ),
+        actions: [
+          FilledButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Parfait'),
+          ),
+        ],
       ),
     );
   }
@@ -253,7 +283,7 @@ class _DetailScreenState extends State<DetailScreen> {
               Expanded(
                 flex: 2,
                 child: FilledButton(
-                  onPressed: _ouvrirReservation,
+                  onPressed: _reserver,
                   style: FilledButton.styleFrom(minimumSize: const Size(0, 52)),
                   child: const Text('Réserver'),
                 ),
