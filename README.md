@@ -102,3 +102,19 @@ Le Devoir :
 Palier 1 du TP5:
 ![Screenshot](assets/images/tp5palier1.png)
 
+
+
+
+
+Palier 2 du TP5:
+![Screenshot](assets/images/tp5palier2.png)
+
+
+Q1/filtre est conserve car HomeScreen reste dans la pile de navigation et DetailScreen est ajouté au dessus.  .pop retire DetailScreen et rtrouve HomeScreen
+
+
+Q2/DetailScreen recoit la destination dans constructor. on utilise  le passage du parametre
+
+
+Q3/ sans le ClipBehavior leffet d'encre depasse les coins de la carte
+

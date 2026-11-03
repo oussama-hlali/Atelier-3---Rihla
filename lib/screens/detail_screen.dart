@@ -40,13 +40,14 @@ class _DetailScreenState extends State<DetailScreen> {
                       child: CircleAvatar(
                         backgroundColor: Colors.white,
                         child: IconButton(
+                          tooltip: 'Retour',
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           icon: const Icon(
                             Icons.arrow_back,
                             color: Colors.black87,
                           ),
-                          onPressed: () {
-                            Navigator.maybePop(context);
-                          },
                         ),
                       ),
                     ),

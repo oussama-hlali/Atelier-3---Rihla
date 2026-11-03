@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/destination.dart';
+import '../screens/detail_screen.dart';
 
 class HeroBanner extends StatelessWidget {
   final Destination destination;
@@ -122,8 +123,12 @@ class HeroBanner extends StatelessWidget {
               bottom: 20,
               child: FilledButton(
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Découverte de ${destination.nom}')),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          DetailScreen(destination: destination),
+                    ),
                   );
                 },
                 style: FilledButton.styleFrom(
