@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/destination.dart';
 import '../widgets/favorite_button.dart';
+import 'reservation_screen.dart';
 
 class DetailScreen extends StatefulWidget {
   final Destination destination;
@@ -14,6 +15,17 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   int _voyageurs = 2;
+  void _ouvrirReservation() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ReservationScreen(
+          destination: widget.destination,
+          voyageurs: _voyageurs,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -241,17 +253,7 @@ class _DetailScreenState extends State<DetailScreen> {
               Expanded(
                 flex: 2,
                 child: FilledButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context)
-                      ..hideCurrentSnackBar()
-                      ..showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Fonctionnalité de réservation à venir',
-                          ),
-                        ),
-                      );
-                  },
+                  onPressed: _ouvrirReservation,
                   style: FilledButton.styleFrom(minimumSize: const Size(0, 52)),
                   child: const Text('Réserver'),
                 ),

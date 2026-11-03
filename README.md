@@ -118,3 +118,23 @@ Q2/DetailScreen recoit la destination dans constructor. on utilise  le passage d
 
 Q3/ sans le ClipBehavior leffet d'encre depasse les coins de la carte
 
+
+
+Palier 3 du TP5:
+
+![Screenshot](assets/images/tp5palier3.png)
+
+![Screenshot](assets/images/tp5palier33.png)
+
+
+Q1/
+
+vérifie tous les champs du formulaire ,elle renvoie true si tout est correct, et false si au moins un champ a une erreur.
+
+Q2/
+
+inputFormatters bloque les mauvais caractères pendant la frappe ,validator verifie la valeur finale et affiche un message d'erreur.
+
+Q3/
+
+ Pour liberer la memoire quand l'ecran est fermé et éviter une fuite de mémoir
