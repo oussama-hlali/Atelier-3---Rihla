@@ -194,6 +194,21 @@ Checkpoint 1:
 
 ##TP5 Consomations API
 
+ Palier 0 :
+
+
+ Q1/
+
+ 404 se sont les familles 4.x.x
+
+ Q2/
+
+Le serveur choisi lid de la reservation creee
+
+Q3/
+
+GET sert a lire seulement contrairement au POST doir envoyer des donnes a creer donc on a besoin du body
+
 
 ![Screenshot](assets/images/getdest.png)
 
@@ -206,3 +221,7 @@ Checkpoint 1:
 ![Screenshot](assets/images/post%20.png)
 
 ![Screenshot](assets/images/deletedest.png)
+
+Palier 1 :
+
+![Screenshot](assets/images/flutterterminal.png)
