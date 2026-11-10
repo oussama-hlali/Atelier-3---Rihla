@@ -4,7 +4,8 @@ import '../models/destination.dart';
 import '../widgets/favorite_button.dart';
 import 'reservation_screen.dart';
 import '../models/reservation.dart';
-import 'reservation_screen.dart';
+import '../models/avis.dart';
+import 'avis_screen.dart';
 
 class DetailScreen extends StatefulWidget {
   final Destination destination;
@@ -17,6 +18,7 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   int _voyageurs = 2;
+  final List<Avis> _avis = [];
 
   Future<void> _reserver() async {
     final reservation = await Navigator.push<Reservation>(
@@ -53,6 +55,69 @@ class _DetailScreenState extends State<DetailScreen> {
             child: const Text('Parfait'),
           ),
         ],
+      ),
+    );
+  }
+
+  Future<void> _laisserAvis() async {
+    final avis = await Navigator.push<Avis>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AvisScreen(destination: widget.destination),
+      ),
+    );
+    if (avis == null) return;
+    if (!mounted) return;
+    setState(() => _avis.insert(0, avis));
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text('Merci pour votre avis !')));
+  }
+
+  Widget _etoilesAvis(int note) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: List.generate(
+        5,
+        (i) => Icon(
+          i < note ? Icons.star : Icons.star_border,
+          size: 16,
+          color: Colors.amber,
+        ),
+      ),
+    );
+  }
+
+  Widget _carteAvis(Avis a) {
+    final cs = Theme.of(context).colorScheme;
+    return Card(
+      margin: const EdgeInsets.only(bottom: 8),
+      elevation: 0,
+      color: cs.surfaceContainerLow,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 14,
+                  child: Text(a.auteur[0].toUpperCase()),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    a.auteur,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                _etoilesAvis(a.note),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(a.commentaire),
+          ],
+        ),
       ),
     );
   }
@@ -241,6 +306,31 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'Avis (${_avis.length})',
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        TextButton.icon(
+                          onPressed: _laisserAvis,
+                          icon: const Icon(Icons.rate_review_outlined),
+                          label: const Text('Laisser un avis'),
+                        ),
+                      ],
+                    ),
+                    if (_avis.isEmpty)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                        child: Text('Soyez le premier à donner votre avis.'),
+                      )
+                    else
+                      ..._avis.map(_carteAvis),
 
                     const SizedBox(height: 24),
                   ],

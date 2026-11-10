@@ -184,4 +184,11 @@ Palier 6 du TP5 :
 ![Screenshot](assets/images/tp5palier6.png)
 
 
+Checkpoint 1:
+
+![Screenshot](assets/images/ch1.png)
+
+
+![Screenshot](assets/images/ch2.png)
+
 
