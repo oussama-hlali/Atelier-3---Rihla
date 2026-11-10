@@ -6,6 +6,7 @@ import 'reservation_screen.dart';
 import '../models/reservation.dart';
 import '../models/avis.dart';
 import 'avis_screen.dart';
+import '../services/api_service.dart';
 
 class DetailScreen extends StatefulWidget {
   final Destination destination;
@@ -35,15 +36,31 @@ class _DetailScreenState extends State<DetailScreen> {
 
     if (!mounted) return;
 
+    final String id;
+    try {
+      // TODO 5 : appeler ApiService.creerReservation (sans oublier await)
+      id = await ApiService.creerReservation(reservation);
+    } catch (e) {
+      if (!mounted) return; // TODO 6 : SnackBar rouge « Envoi impossible : json-server est-il lancé ?
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Envoi impossible : json-server est-il lancé ?'),
+          backgroundColor: Theme.of(context).colorScheme.error,
+        ),
+      );
+      return; // pas de confirmation si rien n'est enregistré
+    }
+
+    if (!mounted) return; // ajouter « N° de réservation : $id »
     await showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         icon: const Icon(Icons.check_circle, color: Colors.green, size: 48),
         title: const Text('Réservation confirmée'),
-
         content: Text(
           '${reservation.nom}, votre voyage à '
           '${reservation.destination.nom} est réservé.\n\n'
+          'N° de réservation : $id\n'
           'Voyageurs : ${reservation.voyageurs}\n'
           'Formule : ${reservation.formule}\n'
           'Total : ${reservation.total} DT\n\n'

@@ -254,8 +254,26 @@ Q3/
 Non, le changement de categorie ne fait pas de requete car _filtrer travaille sur la liste daja recue.
 
 
-![Screenshot](assets/images/chargement.png.png)
-![Screenshot](assets/images/chargement%20erreur.png.png)
+![Screenshot](assets/images/chargement.png)
+![Screenshot](assets/images/chargement%20erreur.png)
 
-![Screenshot](assets/images/rafraichiseemnet.png.png)
+![Screenshot](assets/images/rafraichiseemnet.png)
 
+
+Palier 4 :
+
+Q1/
+
+l'id suffit pour retrouver la destination, ce qui évite la duplication des données
+
+Q2/
+
+sans Content-Type, le serveur ne comprend pas que le bosy du JSON et n'enregistre pas correctement la réservation.
+
+Q3/
+
+user a pu quitter l'ecran pendant l'attente, donc utiliser context apres l'await serait dangereux
+
+![Screenshot](assets/images/confiavecnum.png)
+
+![Screenshot](assets/images/pasconfimsgerr.png)
