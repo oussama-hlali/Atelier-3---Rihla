@@ -192,3 +192,17 @@ Checkpoint 1:
 ![Screenshot](assets/images/ch2.png)
 
 
+##TP5 Consomations API
+
+
+![Screenshot](assets/images/getdest.png)
+
+![Screenshot](assets/images/getdest99.png)
+
+![Screenshot](assets/images/getdestplage.png)
+
+![Screenshot](assets/images/sortdestemulator.png)
+
+![Screenshot](assets/images/post%20.png)
+
+![Screenshot](assets/images/deletedest.png)
