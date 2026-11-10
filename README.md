@@ -225,3 +225,37 @@ GET sert a lire seulement contrairement au POST doir envoyer des donnes a creer 
 Palier 1 :
 
 ![Screenshot](assets/images/flutterterminal.png)
+
+Palier 2:
+
+Q1/
+
+fromJson est un constructeur car il construit et renvoie  un objet a partir dune map.
+
+Q2/
+
+avec prix entre guillements  le cast as int s'echoue.
+
+Q3/
+
+car la reponse n'arrive pas tout de suite et l'interface ne doit pas etre bloquer.
+
+
+Palier 3:
+
+Q1/
+late car le Future ne peut pas etre créé a la déclaration mais seulement dans initState
+
+Q2/
+Sans hasError, snapshot.data! vaudrait null et l’app planterait.
+
+Q3/
+
+Non, le changement de categorie ne fait pas de requete car _filtrer travaille sur la liste daja recue.
+
+
+![Screenshot](assets/images/chargement.png.png)
+![Screenshot](assets/images/chargement%20erreur.png.png)
+
+![Screenshot](assets/images/rafraichiseemnet.png.png)
+

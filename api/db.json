@@ -65,42 +65,8 @@
       "prix": 260,
       "duree": "2 jours",
       "description": "Médina fortifiée au bord de la mer, jardins de jasmin et longues plages : la station balnéaire historique du Cap Bon."
-    },
-    {
-      "destinationId": "2",
-      "nom": "Test",
-      "email": "test@mail.tn",
-      "telephone": "22123456",
-      "dateDepart": "2026-12-15T00:00:00.000",
-      "voyageurs": 2,
-      "formule": "Confort",
-      "total": 1092,
-      "id": "S9O0w_KoZpo"
     }
   ],
-  "reservations": [
-    {
-      "destinationId": "2",
-      "nom": "Test",
-      "email": "test@mail.tn",
-      "telephone": "22123456",
-      "dateDepart": "2026-12-15T00:00:00.000",
-      "voyageurs": 2,
-      "formule": "Confort",
-      "total": 1092,
-      "id": "0FHmrLAMPHg"
-    },
-    {
-      "destinationId": "2",
-      "nom": "Test",
-      "email": "test@mail.tn",
-      "telephone": "22123456",
-      "dateDepart": "2026-12-15T00:00:00.000",
-      "voyageurs": 2,
-      "formule": "Confort",
-      "total": 1092,
-      "id": "KW8omh30vFw"
-    }
-  ],
+  "reservations": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

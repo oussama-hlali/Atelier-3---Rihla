@@ -23,12 +23,11 @@ class _ReservationScreenState extends State<ReservationScreen> {
   final _nomCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
   final _telCtrl = TextEditingController();
-
   final _dateCtrl = TextEditingController();
+
   DateTime? _date;
   String _formule = 'Essentiel';
   bool _conditions = false;
-
   AutovalidateMode _autoValidation = AutovalidateMode.disabled;
 
   int get _prixParPersonne => _formule == 'Confort'
@@ -36,12 +35,13 @@ class _ReservationScreenState extends State<ReservationScreen> {
       : widget.destination.prix;
 
   int get _total => _prixParPersonne * widget.voyageurs;
+
   @override
   void dispose() {
-    // TODO 1 : libérer les trois contrôleurs, puis super.dispose()
     _nomCtrl.dispose();
     _emailCtrl.dispose();
     _telCtrl.dispose();
+    _dateCtrl.dispose();
     super.dispose();
   }
 
@@ -65,26 +65,16 @@ class _ReservationScreenState extends State<ReservationScreen> {
   }
 
   String? _validerEmail(String? v) {
-    if (v == null || v.trim().isEmpty) {
-      return 'Indiquez votre e-mail';
-    }
-
+    if (v == null || v.trim().isEmpty) return 'Indiquez votre e-mail';
     if (!RegExp(r'^[\w.+-]+@[\w-]+\.[\w.]+$').hasMatch(v.trim())) {
       return 'E-mail invalide (ex. : nom@mail.tn)';
     }
-
     return null;
   }
 
   String? _validerTel(String? v) {
-    // TODO 3 : vide -> 'Indiquez votre téléphone'
-    //          longueur différente de 8 -> '8 chiffres attendus'
-    if (v == null || v.trim().isEmpty) {
-      return 'Indiquez votre téléphone';
-    }
-    if (!RegExp(r'^\d{8}$').hasMatch(v.trim())) {
-      return '8 chiffres attendus';
-    }
+    if (v == null || v.trim().isEmpty) return 'Indiquez votre téléphone';
+    if (v.trim().length != 8) return '8 chiffres attendus';
     return null;
   }
 
@@ -97,9 +87,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
       lastDate: DateTime.now().add(const Duration(days: 365)),
       helpText: 'Date de départ',
     );
-    // TODO 1 : si l'utilisateur annule (null), ne rien faire
     if (choisie == null) return;
-    // TODO 2 : mémoriser la date et écrire 'jj/mm/aaaa' dans _dateCtrl
     setState(() {
       _date = choisie;
       _dateCtrl.text =
@@ -110,8 +98,10 @@ class _ReservationScreenState extends State<ReservationScreen> {
   }
 
   void _valider() {
-    if (!_formKey.currentState!.validate()) return;
-    // Provisoire : sera remplacé au palier 5
+    if (!_formKey.currentState!.validate()) {
+      setState(() => _autoValidation = AutovalidateMode.onUserInteraction);
+      return;
+    }
     final reservation = Reservation(
       destination: widget.destination,
       nom: _nomCtrl.text.trim(),
@@ -132,7 +122,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
       appBar: AppBar(title: const Text('Réserver')),
       body: Form(
         key: _formKey,
-        autovalidateMode: _autoValidation, // CHANGED (exercice)
+        autovalidateMode: _autoValidation,
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
           child: Column(
@@ -169,8 +159,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
                               ),
                             ),
                             Text(
-                              // À ADAPTER : `duree` = nom réel dans ta classe Destination
-                              '${widget.destination.duree} jours · ${widget.voyageurs} voyageur(s)',
+                              '${widget.destination.duree} · '
+                              '${widget.voyageurs} voyageur(s)',
                               style: theme.textTheme.bodySmall,
                             ),
                           ],
@@ -226,10 +216,9 @@ class _ReservationScreenState extends State<ReservationScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-
               TextFormField(
                 controller: _dateCtrl,
-                readOnly: true,
+                readOnly: true, // pas de clavier : on passe par le calendrier
                 onTap: _choisirDate,
                 decoration: _deco(
                   'Date de départ',
@@ -238,7 +227,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
                 validator: (_) => _date == null ? 'Choisissez une date' : null,
               ),
               const SizedBox(height: 16),
-
               SegmentedButton<String>(
                 segments: const [
                   ButtonSegment(
@@ -254,7 +242,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
                 ],
                 selected: {_formule},
                 onSelectionChanged: (choix) {
-                  // TODO 3 : mémoriser choix.first dans _formule
                   setState(() => _formule = choix.first);
                 },
               ),
